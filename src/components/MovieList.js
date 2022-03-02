@@ -10,10 +10,17 @@ function MovieList() {
   const [movies, setMovies] = useState(moviesDataJSON);
 
 
+  function addMovie(newMovie){
+    setMoviesData([...moviesData, newMovie])
+
+    setMovies([...moviesData, newMovie].sort((a,b)=> a.title > b.title))
+  }
+
+
   return (
     <div>
       <FilterMovies filterMovies={filterMovieList} />
-      <AddMovie addMovie={addNewMovie} />
+      <AddMovie addMovie={addMovie} />
       {movies.map((movie) => {
         return <MovieCard key={movie._id} movie={movie} />;
       })}
