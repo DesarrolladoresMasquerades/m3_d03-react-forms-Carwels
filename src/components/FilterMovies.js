@@ -2,6 +2,13 @@ import { useState } from "react";
 
 function FilterMovies(props) {
 
+   const[firstLetter, setFirstLetter] = useState("All")
+
+    function handleSelect(e) {
+      setFirstLetter(e.target.value)
+
+      props.filterMovies(e.target.value)
+    }
   
 
   return (

@@ -5,22 +5,35 @@ import MovieCard from "./MovieCard";
 import AddMovie from "./AddMovie";
 import FilterMovies from "./FilterMovies";
 
-function MovieList() {
+export default function MovieList() {
   const [moviesData, setMoviesData] = useState(moviesDataJSON);
   const [movies, setMovies] = useState(moviesDataJSON);
 
+  const addNewMovie = (newMovie) => {
+    const updatedMoviesData = [...moviesData, newMovie];
+    const updatedMovies = [...movies, newMovie];
 
-  function addMovie(newMovie){
-    setMoviesData([...moviesData, newMovie])
+    setMoviesData(updatedMoviesData);
+    setMovies(updatedMovies);
+  };
 
-    setMovies([...moviesData, newMovie].sort((a,b)=> a.title > b.title))
-  }
+  const filterMovieList = (str) => {
+    let filteredMovies;
+    if (str === "All") {
+      filteredMovies = moviesData;
+    } else {
+      filteredMovies = moviesData.filter((movie) => {
+        return movie.title[0].toLowerCase() === str.toLowerCase();
+      });
+    }
 
+    setMovies(filteredMovies);
+  };
 
   return (
     <div>
       <FilterMovies filterMovies={filterMovieList} />
-      <AddMovie addMovie={addMovie} />
+      <AddMovie addMovie={addNewMovie} />
       {movies.map((movie) => {
         return <MovieCard key={movie._id} movie={movie} />;
       })}
@@ -28,4 +41,3 @@ function MovieList() {
   );
 }
 
-export default MovieList;

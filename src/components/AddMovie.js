@@ -15,7 +15,7 @@ function AddMovie(props) {
     if(inputName === "hasOscars") value = event.target.checked
     else value = event.target.value
 
-    setFormData({...formData, [inputName]: value})
+    setFormData({...formData, [inputName]: value})// Object.asssign( {}, formData, {[inputName]: value} )
   }
 
   function handleSubmit(event) {
